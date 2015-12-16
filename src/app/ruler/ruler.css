@@ -1,0 +1,148 @@
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../../assets/fonts/OpenSans-Bold.ttf) format('ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Open Sans Light'), local('OpenSans-Light'), url(../../assets/fonts/OpenSans-Light.ttf) format('ttf');
+}
+
+@font-face {
+	font-family: 'Raleway';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Raleway Light'), local('Raleway-Light'), url(../../assets/fonts/Raleway-Light.ttf) format('ttf');
+}
+
+html {
+	font-size: 10px;
+	min-width: 0;
+}
+
+body {
+	min-width: 0;
+	font-family: 'Open Sans';
+	font-weight: 300;
+}
+
+.ruler-mask {
+	-webkit-app-region: drag;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #888;
+	opacity: 0.3;
+}
+
+.ruler {
+	-webkit-user-select: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-clip-path: inset(1em 1em 1em 1em);
+	transition: all .5s ease-out;
+}
+
+.ruler:hover {
+	/*background-color: rgba(0, 0, 0, 0.4);*/
+}
+
+.ruler__inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.ruler__inner__border {
+	position: absolute;
+}
+
+.ruler__inner__border--left {
+	left: 10em;
+	height: 100%;
+	border-left: 1px solid white;
+}
+
+.ruler__inner__border--right {
+	right: 5em;
+	height: 100%;
+	border-right: 1px solid white;
+}
+
+.ruler__inner__border--top {
+	top: 5em;
+	width: 100%;
+	border-top: 1px solid white;
+}
+
+.ruler__inner__border--bottom {
+	bottom: 7.5em;
+	width: 100%;
+	border-bottom: 1px solid white;
+}
+
+.ruler__inner__info {
+	position: absolute;
+	bottom: 3.4em;
+	left: 1.6em;
+	width: 6.5em;
+	font-size: 1.1em;
+	color: white;
+	text-align: right
+}
+
+.ruler__inner__info__width:before {
+	content: 'W: ';
+}
+.ruler__inner__info__height:before {
+	content: 'H: ';
+}
+
+.ruler__inner__info__width,
+.ruler__inner__info__height {
+	text-align: right;
+}
+
+.ruler__inner__title {
+	font-family: "Raleway";
+	font-weight: 300;
+	font-size: 1.5em;
+	position: absolute;
+	top: 1.45em;
+	left: 5.3em;
+	color: white;
+}
+
+.ruler__inner__close {
+	position: absolute;
+	right: 1.35em;
+	top: 1.1em;
+	color: #888;
+	height: 1.4em;
+	font-size: 1.8em;
+	cursor: pointer;
+}
+
+.ruler__inner__theme {
+	color: #888;
+	position: absolute;
+	bottom: 5.3em;
+	right: 3em;
+	cursor: pointer;
+}
+
+.dark-theme .ruler__inner__border,
+.dark-theme .ruler__inner__info,
+.dark-theme .ruler__inner__title {
+	border-color: black !important;
+	color: black;
+}

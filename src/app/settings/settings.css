@@ -1,0 +1,16 @@
+body {
+	font-family: "Open Sans";
+	padding-left: 1em;
+}
+
+h1 {
+	font-size: 1.4em;
+}
+
+label {
+	display: block;
+}
+
+input {
+	font-family: "Open Sans";
+}
