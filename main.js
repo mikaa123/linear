@@ -37,8 +37,8 @@ function createNewRuler(windowInfo) {
 	ruler.loadURL(`file://${__dirname}/src/app/ruler/ruler.html`);
 
 	ruler.on('closed', () => {
-		ruler = undefined;
 		rulers.splice(rulers.indexOf(ruler), 1);
+		ruler = undefined;
 	});
 
 	rulers.push(ruler);
