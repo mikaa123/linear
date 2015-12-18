@@ -19,15 +19,22 @@
 	src: local('Raleway Light'), local('Raleway-Light'), url(../../assets/fonts/Raleway-Light.ttf) format('ttf');
 }
 
+html,
+body {
+	height: 100%;
+}
+
 html {
 	font-size: 10px;
 	min-width: 0;
+	overflow: hidden;
 }
 
 body {
 	min-width: 0;
 	font-family: 'Open Sans';
 	font-weight: 300;
+	overflow: auto;
 }
 
 .ruler-mask {
