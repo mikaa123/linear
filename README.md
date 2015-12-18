@@ -22,7 +22,7 @@ Linear uses transparent, resizable frameless window, which is rather experimenta
 This is why mac is the only supported platform at this point.
 
 ## Contributing
-Any contribution is welcome, in fact, you'll recieve an instant hug from doing one. ;)
+Any contribution is welcome, in fact, you'll receive an instant hug from doing one. ;)
 Linear was build as a side-project and is a little rough around the edges, so even bug reports would be great.
 
 ### Development
