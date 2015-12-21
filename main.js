@@ -151,6 +151,8 @@ app.on('ready', function() {
 
 	globalShortcut.register('Command + Control + T', toggleRulerCommand);
 	globalShortcut.register('Command + Control + R', createNewRuler);
+
+	createNewRuler();
 });
 
 // We make sure not to quit when every windows are closed.
