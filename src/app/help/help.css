@@ -1,0 +1,27 @@
+body {
+	font-family: 'Open Sans';
+	padding: .4em 2em;
+}
+
+h1 {
+	font-family: 'Raleway';
+}
+
+footer {
+	position: absolute;
+	bottom: 2em;
+	right: 2em;
+}
+
+b {
+	color: #6A24FA;
+}
+
+.step {
+	opacity: 0;
+	-webkit-transition: opacity .2s ease-out;
+}
+
+.step--0 {
+	opacity: 1;
+}

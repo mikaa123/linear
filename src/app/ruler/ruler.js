@@ -26,7 +26,7 @@ let unitStrategies = {
 
 	/**
 	 * Format into to pixels.
-	 * @param  {px} px - The number of px to display.
+	 * @param	{px} px - The number of px to display.
 	 * @return {String} A formatted string displaying px.
 	 */
 	px(px) {
@@ -35,7 +35,7 @@ let unitStrategies = {
 
 	/**
 	 * Format into to em.
-	 * @param  {px} px - The number of px to convert to em.
+	 * @param	{px} px - The number of px to convert to em.
 	 * @return {String} A formatted string displaying em.
 	 */
 	em(em) {
@@ -74,7 +74,7 @@ contextMenu.append(new MenuItem({
 		let bounds = browserWindow.getBounds();
 		let position = browserWindow.getPosition();
 
-		ipc.send('duplicate-ruler', {
+		ipc.send('create-ruler', {
 			x: position[0],
 			y: position[1],
 			width: bounds.width,
@@ -84,8 +84,8 @@ contextMenu.append(new MenuItem({
 }));
 
 window.addEventListener('contextmenu', function (e) {
-  e.preventDefault();
-  contextMenu.popup(remote.getCurrentWindow());
+	e.preventDefault();
+	contextMenu.popup(remote.getCurrentWindow());
 }, false);
 
 document.querySelector('.ruler__inner__close').addEventListener('click', () => browserWindow.close());

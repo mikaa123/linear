@@ -1,0 +1,42 @@
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../../assets/fonts/OpenSans-Bold.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Open Sans Light'), local('OpenSans-Light'), url(../../assets/fonts/OpenSans-Light.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Raleway';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Raleway Light'), local('Raleway-Light'), url(../../assets/fonts/Raleway-Light.ttf) format('truetype');
+}
+
+.close {
+	position: absolute;
+	right: 1.35em;
+	top: 1.1em;
+	color: #888;
+	height: 1.4em;
+	font-size: 1.8em;
+	cursor: pointer;
+}
+
+.btn {
+	background-color: #6A24FA;
+	padding: 1em 2em;
+	color: white;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.btn__inner {
+	font-family: 'Open Sans';
+}

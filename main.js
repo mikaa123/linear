@@ -7,10 +7,12 @@ const ipc = electron.ipcMain;
 const Tray = electron.Tray;
 const Menu = electron.Menu;
 const path = require('path');
+const dataStore = require('./src/data-store');
 
 let rulers = [];
 let mainWindow;
 let settingsWindow;
+let helpWindow;
 
 /**
  * Create a ruler window and push it to the `rulers` array. The ruler window
@@ -42,6 +44,29 @@ function createNewRuler(windowInfo) {
 	});
 
 	rulers.push(ruler);
+}
+
+/**
+ * Show the help page for better onboarding.
+ */
+function showHelp() {
+	if (helpWindow) {
+		return;
+	}
+
+	helpWindow = new BrowserWindow({
+		width: 700,
+		height: 570,
+		frameless: true,
+		frame: false,
+		resizable: false
+	});
+
+	helpWindow.loadURL(`file://${__dirname}/src/app/help/help.html`);
+
+	helpWindow.on('closed', () => {
+		helpWindow = null;
+	});
 }
 
 let hidden = false;
@@ -114,6 +139,10 @@ app.on('ready', function() {
 				}
 			},
 			{
+				label: 'Help',
+				click: showHelp
+			},
+			{
 				type: 'separator'
 			},
 			{
@@ -152,7 +181,12 @@ app.on('ready', function() {
 	globalShortcut.register('Command + Control + T', toggleRulerCommand);
 	globalShortcut.register('Command + Control + R', createNewRuler);
 
-	createNewRuler();
+	// Show help the first time the app is launched.
+	if (dataStore.readSettings('tutorialShown')) {
+		createNewRuler();
+	} else {
+		showHelp();
+	}
 });
 
 // We make sure not to quit when every windows are closed.
@@ -169,6 +203,6 @@ ipc.on('settings-changed', () => {
 });
 
 // Duplicate a given ruler.
-ipc.on('duplicate-ruler', (evt, duplicateInfo) => {
-	createNewRuler(duplicateInfo);
+ipc.on('create-ruler', (evt, rulerInfo) => {
+	createNewRuler(rulerInfo);
 });
