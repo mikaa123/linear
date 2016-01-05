@@ -15,7 +15,16 @@ margins.
 * It adapts to dark and light backgrounds
 * System-wide shortcuts to hide/show rulers
 
-Linear is proudly build with [Electron](https://github.com/atom/electron).
+Here is a [video](https://www.youtube.com/watch?v=VcozN5LwLEw#action=share) to get your started.
+
+Linear is proudly built with [Electron](https://github.com/atom/electron).
+
+## Installing
+Download the [latest build](https://github.com/mikaa123/linear/releases) or install via homebrew (much thanks to [@goronfreeman](https://github.com/goronfreeman)):
+
+```
+$ brew cask install linear
+```
 
 ## Caveats
 Linear uses transparent, resizable frameless window, which is rather experimental.
