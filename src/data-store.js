@@ -2,7 +2,7 @@
 
 const path = require('path');
 const nconf = require('nconf').file({
-	file: path.join(process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'], 'linear.json')
+	file: path.join(process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'], '.linear')
 });
 
 module.exports = {
