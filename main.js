@@ -100,6 +100,7 @@ function toggleRulerCommand() {
 	}, toggleRuler(rulers[0]));
 }
 
+app.dock.hide();
 app.on('ready', function() {
 	let trayIcon = new Tray(path.join(__dirname, 'src/assets/images/lrTemplate.png'));
 
