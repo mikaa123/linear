@@ -184,7 +184,8 @@ app.on('ready', function() {
 
 	// Show help the first time the app is launched.
 	if (dataStore.readSettings('tutorialShown')) {
-		createNewRuler();
+		// We create the new ruler on next tick, otherwise it isn't always created.
+		setTimeout(createNewRuler);
 	} else {
 		showHelp();
 	}
