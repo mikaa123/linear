@@ -9,6 +9,11 @@ const Menu = electron.Menu;
 const path = require('path');
 const dataStore = require('./src/data-store');
 
+//	Uncomment this to see debugging tools.
+// require('electron-debug')({
+//     showDevTools: true
+// });
+
 let rulers = [];
 let mainWindow;
 let settingsWindow;
@@ -206,5 +211,10 @@ ipc.on('settings-changed', () => {
 
 // Duplicate a given ruler.
 ipc.on('create-ruler', (evt, rulerInfo) => {
+
+	//	Offset new duplicate ruler to make it more evident.
+	rulerInfo.x += 10;
+	rulerInfo.y += 10;
+
 	createNewRuler(rulerInfo);
 });
