@@ -11,7 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/atom/electron-quick-start.git"
   },
-  "keywords": ["ruler", "measure", "electron"],
+  "keywords": [
+    "ruler",
+    "measure",
+    "electron"
+  ],
   "author": "Michael Sokol",
   "license": "MIT",
   "homepage": "http://mikaa123.github.io/linear-website/",
@@ -20,6 +24,7 @@
     "electron-prebuilt": "^0.35.0"
   },
   "dependencies": {
+    "electron-debug": "^0.5.1",
     "nconf": "^0.8.2"
   }
 }

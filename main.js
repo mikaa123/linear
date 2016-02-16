@@ -9,6 +9,11 @@ const Menu = electron.Menu;
 const path = require('path');
 const dataStore = require('./src/data-store');
 
+//	Uncomment this to see debugging tools.
+// require('electron-debug')({
+//     showDevTools: true
+// });
+
 let rulers = [];
 let mainWindow;
 let settingsWindow;
