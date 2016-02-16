@@ -14,6 +14,7 @@ elements themselves.
 margins.
 * It adapts to dark and light backgrounds
 * System-wide shortcuts to hide/show rulers
+* Fine-tune a ruler's positions using arrow keys. Hold shift for faster move. (Much thanks to [@gtagle](https://github.com/gtagle)
 
 Here is a [video](https://www.youtube.com/watch?v=VcozN5LwLEw#action=share) to get your started.
 
