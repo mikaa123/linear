@@ -21,6 +21,8 @@ let info = {
 
 let baseFontSize; // Used to calculate em.
 
+let isShiftDown = false;
+
 // This object holds the different strategies for displaying units.
 let unitStrategies = {
 
@@ -82,6 +84,54 @@ contextMenu.append(new MenuItem({
 		});
 	}
 }));
+
+window.addEventListener('keydown', function(evt) {
+	let shift = 16;
+
+	switch (evt.keyCode) {
+		case shift:
+			isShiftDown = true;
+			break;
+		default:
+
+	}
+});
+
+window.addEventListener('keyup', function(evt) {
+	//	Keycodes for arrowkeys and shift.
+	let up = 38,
+		down = 40,
+		left = 37,
+		right = 39,
+		shift = 16;
+
+	//	Grabbing the current position to add to it.
+	let position = browserWindow.getPosition();
+	let x = position[0];
+	let y = position[1];
+
+	//	Figuring out if shiftKey is down to increment by 10px or just 1px
+	let increment = isShiftDown ? 10 : 1;
+
+	switch (evt.keyCode) {
+		case shift:
+			isShiftDown = false;
+			break;
+		case up:
+			browserWindow.setPosition(x, y - increment, true);
+			break;
+		case down:
+			browserWindow.setPosition(x, y + increment, true);
+			break;
+		case right:
+			browserWindow.setPosition(x + increment, y, true);
+			break;
+		case left:
+			browserWindow.setPosition(x - increment, y, true);
+			break;
+		default:
+	}
+});
 
 window.addEventListener('contextmenu', function (e) {
 	e.preventDefault();
