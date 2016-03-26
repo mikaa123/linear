@@ -25,3 +25,12 @@ b {
 .step--0 {
 	opacity: 1;
 }
+
+span.lr {
+	display: inline-block;
+	background: url('../../assets/images/lrTemplate.png') no-repeat 4px 4px;
+	background-color: #f1f1f1;
+	padding: 4px;
+	width: 14px;
+	height: 16px;
+}
