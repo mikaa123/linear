@@ -25,3 +25,26 @@ b {
 .step--0 {
 	opacity: 1;
 }
+
+span.lr {
+	display: inline-block;
+	background: url('../../assets/images/lrTemplate.png') no-repeat 4px 4px;
+	background-color: #f1f1f1;
+	padding: 4px;
+	width: 14px;
+	height: 16px;
+}
+
+kbd {
+	display: inline-block;
+	padding: 5px;
+	font-size: 13px;
+	line-height: 10px;
+	color: #555;
+	vertical-align: middle;
+	background-color: #fcfcfc;
+	border: solid 1px #ccc;
+	border-bottom-color: #bbb;
+	border-radius: 3px;
+	box-shadow: inset 0 -1px 0 #bbb;
+}
