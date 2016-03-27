@@ -11,13 +11,20 @@ let borders = {
 	top: document.querySelector('.ruler__inner__border--top'),
 	right: document.querySelector('.ruler__inner__border--right'),
 	bottom: document.querySelector('.ruler__inner__border--bottom'),
-	left: document.querySelector('.ruler__inner__border--left'),
+	left: document.querySelector('.ruler__inner__border--left')
 };
 
 let info = {
 	width: document.querySelector('.ruler__inner__info__width'),
 	height: document.querySelector('.ruler__inner__info__height')
 };
+
+let centerGuides = {
+	vertical: document.querySelector('#guide__vertical'),
+	horizontal: document.querySelector('#guide__horizontal')
+};
+
+let centerGuidesAreVisible = false;
 
 let baseFontSize; // Used to calculate em.
 
@@ -37,7 +44,7 @@ let unitStrategies = {
 
 	/**
 	 * Format into to em.
-	 * @param	{px} px - The number of px to convert to em.
+	 * @param {px} px - The number of px to convert to em.
 	 * @return {String} A formatted string displaying em.
 	 */
 	em(em) {
@@ -98,7 +105,7 @@ window.addEventListener('keydown', function(evt) {
 });
 
 window.addEventListener('keyup', function(evt) {
-	//	Keycodes for arrowkeys and shift.
+	// Keycodes for arrowkeys and shift.
 	let up = 38,
 		down = 40,
 		left = 37,
@@ -146,5 +153,17 @@ document.querySelector('.ruler__inner__theme').addEventListener('click', () => {
 window.addEventListener('resize', updateMesures);
 
 ipc.on('settings-changed', loadSettings);
+ipc.on('toggle-center-guides', toggleCenterGuides);
+
+function toggleCenterGuides() {
+	centerGuidesAreVisible = !centerGuidesAreVisible;
+	if (centerGuidesAreVisible) {
+		centerGuides.vertical.classList.remove('hidden');
+		centerGuides.horizontal.classList.remove('hidden');
+	} else {
+		centerGuides.vertical.classList.add('hidden');
+		centerGuides.horizontal.classList.add('hidden');
+	}
+}
 
 loadSettings();

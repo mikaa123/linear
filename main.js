@@ -9,7 +9,7 @@ const Menu = electron.Menu;
 const path = require('path');
 const dataStore = require('./src/data-store');
 
-//	Uncomment this to see debugging tools.
+// Uncomment this to see debugging tools.
 // require('electron-debug')({
 //     showDevTools: true
 // });
@@ -52,6 +52,13 @@ function createNewRuler(windowInfo) {
 }
 
 /**
+ * Toggle the visibility of the Center Guides
+ */
+function toggleCenterGuidesCommand() {
+	rulers.forEach((ruler) => ruler.send('toggle-center-guides'));
+}
+
+/**
  * Show the help page for better onboarding.
  */
 function showHelp() {
@@ -78,7 +85,7 @@ let hidden = false;
 
 /**
  * Toggle a ruler asynchronously and give back a promise.
- * @param	{BrowserWindow} ruler - The ruler to toggle
+ * @param {BrowserWindow} ruler - The ruler to toggle
  * @return {Promise}
  */
 let toggleRuler = (ruler) => {
@@ -98,7 +105,7 @@ function toggleRulerCommand() {
 
 	hidden = !hidden;
 
-	// Close all rulers sequencially. Doing otherwise doesn't toggle them
+	// Close all rulers sequentially. Doing otherwise doesn't toggle them
 	// properly. This is most likely an issue with Electron.
 	rulers.slice(1).reduce((acc, val) => {
 		return acc.then(() => toggleRuler(val));
@@ -111,15 +118,21 @@ app.on('ready', function() {
 
 	var trayMenuTemplate = [
 			{
-					label: 'New ruler',
-					accelerator: 'Command+Ctrl+R',
-					click: createNewRuler
+				label: 'New Ruler',
+				accelerator: 'Command+Ctrl+R',
+				click: createNewRuler
 			},
 			{
-					label: 'Toggle rulers',
-					accelerator: 'Command+Ctrl+T',
-					click: toggleRulerCommand,
-					enabled: false
+				label: 'Toggle Rulers',
+				accelerator: 'Command+Ctrl+T',
+				click: toggleRulerCommand,
+				enabled: false
+			},
+			{
+				label: 'Toggle Center Guides',
+				accelerator: 'Command+;',
+				click: toggleCenterGuidesCommand,
+				enabled: true
 			},
 			{
 				type: 'separator'
@@ -152,9 +165,9 @@ app.on('ready', function() {
 				type: 'separator'
 			},
 			{
-					label: 'Quit',
-					accelerator: 'Command+Q',
-					click: () => app.quit()
+				label: 'Quit',
+				accelerator: 'Command+Q',
+				click: () => app.quit()
 			}
 	];
 
@@ -186,6 +199,7 @@ app.on('ready', function() {
 
 	globalShortcut.register('Command + Control + T', toggleRulerCommand);
 	globalShortcut.register('Command + Control + R', createNewRuler);
+	globalShortcut.register('Command + ;', toggleCenterGuidesCommand);
 
 	// Show help the first time the app is launched.
 	if (dataStore.readSettings('tutorialShown')) {

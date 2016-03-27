@@ -53,7 +53,7 @@ body {
 }
 
 .ruler__inner__border--left {
-	left: 10em;
+	left: 5em;
 	height: 100%;
 	border-left: 1px solid white;
 }
@@ -71,19 +71,18 @@ body {
 }
 
 .ruler__inner__border--bottom {
-	bottom: 7.5em;
+	bottom: 5em;
 	width: 100%;
 	border-bottom: 1px solid white;
 }
 
 .ruler__inner__info {
 	position: absolute;
-	bottom: 3.4em;
-	left: 1.6em;
+	bottom: 1.2em;
+	left: 5.6em;
 	width: 6.5em;
 	font-size: 1.1em;
 	color: white;
-	text-align: right
 }
 
 .ruler__inner__info__width:before {
@@ -95,7 +94,7 @@ body {
 
 .ruler__inner__info__width,
 .ruler__inner__info__height {
-	text-align: right;
+	text-align: left;
 }
 
 .ruler__inner__title {
@@ -104,14 +103,14 @@ body {
 	font-size: 1.5em;
 	position: absolute;
 	top: 1.45em;
-	left: 5.3em;
+	left: 1.6em;
 	color: white;
 }
 
 .ruler__inner__theme {
 	color: #888;
 	position: absolute;
-	bottom: 5.3em;
+	bottom: 2.5em;
 	right: 3em;
 	cursor: pointer;
 }
@@ -121,4 +120,29 @@ body {
 .dark-theme .ruler__inner__title {
 	border-color: black !important;
 	color: black;
+}
+
+#guide__vertical, #guide__horizontal {
+	position: fixed;
+	box-sizing: border-box;
+}
+
+#guide__vertical {
+	top:0;
+	left: 50%;
+	height: 100%;
+	width: 1px;
+	border-right: dashed red 1px;
+}
+
+#guide__horizontal {
+	top:50%;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	border-top: dashed red 1px;
+}
+
+.hidden {
+	display: none;
 }
