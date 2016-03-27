@@ -210,7 +210,7 @@ app.on('ready', function() {
 	}
 });
 
-// We make sure not to quit when every windows are closed.
+// We make sure not to quit when all windows are closed.
 app.on('window-all-closed', function() {
 	if (process.platform != 'darwin') {
 		app.quit();
@@ -226,7 +226,7 @@ ipc.on('settings-changed', () => {
 // Duplicate a given ruler.
 ipc.on('create-ruler', (evt, rulerInfo) => {
 
-	//	Offset new duplicate ruler to make it more evident.
+	// Offset new duplicate ruler to make it more evident.
 	rulerInfo.x += 10;
 	rulerInfo.y += 10;
 
