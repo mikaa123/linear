@@ -34,7 +34,6 @@ body {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	-webkit-clip-path: inset(1em 1em 1em 1em);
 	transition: all .5s ease-out;
 }
 
@@ -132,7 +131,7 @@ body {
 	left: 50%;
 	height: 100%;
 	width: 1px;
-	border-right: dashed red 1px;
+	border-right: dashed lightgray 1px;
 }
 
 #guide__horizontal {
@@ -140,7 +139,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 1px;
-	border-top: dashed red 1px;
+	border-top: dashed lightgray 1px;
 }
 
 .hidden {
