@@ -158,7 +158,7 @@ ipc.on('toggle-center-guides', toggleCenterGuides);
 function toggleCenterGuides() {
 	showCenterGuides = !showCenterGuides;
 
-	if (showCenterGuides === true) {
+	if (showCenterGuides) {
 		centerGuides.vertical.classList.remove('hidden');
 		centerGuides.horizontal.classList.remove('hidden');
 	} else {
