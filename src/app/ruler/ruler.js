@@ -26,13 +26,13 @@ let centerGuides = {
 
 let showCenterGuides = false;
 
-let baseFontSize; // Used to calculate em.
+// Used to calculate em.
+let baseFontSize;
 
 let isShiftDown = false;
 
 // This object holds the different strategies for displaying units.
 let unitStrategies = {
-
 	/**
 	 * Format into to pixels.
 	 * @param	{px} px - The number of px to display.
@@ -48,7 +48,7 @@ let unitStrategies = {
 	 * @return {String} A formatted string displaying em.
 	 */
 	em(em) {
-		return `${em/baseFontSize}em`;
+		return `${em / baseFontSize}em`;
 	}
 };
 
@@ -92,7 +92,7 @@ contextMenu.append(new MenuItem({
 	}
 }));
 
-window.addEventListener('keydown', function(evt) {
+window.addEventListener('keydown', function (evt) {
 	let shift = 16;
 
 	switch (evt.keyCode) {
@@ -104,7 +104,7 @@ window.addEventListener('keydown', function(evt) {
 	}
 });
 
-window.addEventListener('keyup', function(evt) {
+window.addEventListener('keyup', function (evt) {
 	// Keycodes for arrowkeys and shift.
 	let up = 38,
 		down = 40,
@@ -155,7 +155,7 @@ window.addEventListener('resize', updateMesures);
 ipc.on('settings-changed', loadSettings);
 ipc.on('toggle-center-guides', toggleCenterGuides);
 
-function toggleCenterGuides(event, data) {
+function toggleCenterGuides() {
 	showCenterGuides = !showCenterGuides;
 
 	if (showCenterGuides === true) {

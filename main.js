@@ -15,7 +15,6 @@ const dataStore = require('./src/data-store');
 // });
 
 let rulers = [];
-let mainWindow;
 let settingsWindow;
 let helpWindow;
 
@@ -28,13 +27,13 @@ let helpWindow;
 function createNewRuler(windowInfo) {
 	let _windowInfo = windowInfo || {};
 	let ruler = new BrowserWindow({
-		width: _windowInfo.width || 151,
-		height: _windowInfo.height || 126,
-		frame: false,
-		transparent: true,
-		alwaysOnTop: true,
-		x: _windowInfo.x,
-		y: _windowInfo.y,
+		'width': _windowInfo.width || 151,
+		'height': _windowInfo.height || 126,
+		'frame': false,
+		'transparent': true,
+		'alwaysOnTop': true,
+		'x': _windowInfo.x,
+		'y': _windowInfo.y,
 		'min-width': 151,
 		'min-height': 126,
 		'standard-window': false,
@@ -114,62 +113,62 @@ function toggleRulerCommand() {
 }
 
 app.dock.hide();
-app.on('ready', function() {
+app.on('ready', function () {
 	let trayIcon = new Tray(path.join(__dirname, 'src/assets/images/lrTemplate.png'));
 
 	var trayMenuTemplate = [
-			{
-				label: 'New Ruler',
-				accelerator: 'Command+Ctrl+R',
-				click: createNewRuler
-			},
-			{
-				label: 'Toggle Rulers',
-				accelerator: 'Command+Ctrl+T',
-				click: toggleRulerCommand,
-				enabled: false
-			},
-			{
-				label: 'Toggle Center Guides',
-				accelerator: 'Command+;',
-				click: toggleCenterGuidesCommand,
-				enabled: true
-			},
-			{
-				type: 'separator'
-			},
-			{
-				label: 'Settings',
-				click: () => {
-					if (settingsWindow) {
-						return;
-					}
-
-					settingsWindow = new BrowserWindow({
-						width: 200,
-						height: 170,
-						alwaysOnTop: true
-					});
-
-					settingsWindow.loadURL(`file://${__dirname}/src/app/settings/settings.html`);
-
-					settingsWindow.on('closed', () => {
-						settingsWindow = null;
-					});
+		{
+			label: 'New Ruler',
+			accelerator: 'Command+Ctrl+R',
+			click: createNewRuler
+		},
+		{
+			label: 'Toggle Rulers',
+			accelerator: 'Command+Ctrl+T',
+			click: toggleRulerCommand,
+			enabled: false
+		},
+		{
+			label: 'Toggle Center Guides',
+			accelerator: 'Command+;',
+			click: toggleCenterGuidesCommand,
+			enabled: true
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Settings',
+			click: () => {
+				if (settingsWindow) {
+					return;
 				}
-			},
-			{
-				label: 'Help',
-				click: showHelp
-			},
-			{
-				type: 'separator'
-			},
-			{
-				label: 'Quit',
-				accelerator: 'Command+Q',
-				click: () => app.quit()
+
+				settingsWindow = new BrowserWindow({
+					width: 200,
+					height: 170,
+					alwaysOnTop: true
+				});
+
+				settingsWindow.loadURL(`file://${__dirname}/src/app/settings/settings.html`);
+
+				settingsWindow.on('closed', () => {
+					settingsWindow = null;
+				});
 			}
+		},
+		{
+			label: 'Help',
+			click: showHelp
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Quit',
+			accelerator: 'Command+Q',
+			click: () => app.quit()
+		}
 	];
 
 	let trayMenu = Menu.buildFromTemplate(trayMenuTemplate);
@@ -180,9 +179,9 @@ app.on('ready', function() {
 	let appMenu = Menu.buildFromTemplate([{
 		label: require('electron').app.getName(),
 		submenu: [{
-				label: 'Quit',
-				accelerator: 'Command+Q',
-				click: () => app.quit()
+			label: 'Quit',
+			accelerator: 'Command+Q',
+			click: () => app.quit()
 		}]
 	}, {
 		label: 'Window',
@@ -196,7 +195,7 @@ app.on('ready', function() {
 	Menu.setApplicationMenu(appMenu);
 
 	// We observe changes on the `rulers` array to enable/disable the toggle menu.
-	Array.observe(rulers, () => toggleRulersMenu.enabled = !!rulers.length);
+	Array.observe(rulers, () => toggleRulersMenu.enabled = Boolean(rulers.length));
 
 	globalShortcut.register('Command + Control + T', toggleRulerCommand);
 	globalShortcut.register('Command + Control + R', createNewRuler);
@@ -212,8 +211,8 @@ app.on('ready', function() {
 });
 
 // We make sure not to quit when all windows are closed.
-app.on('window-all-closed', function() {
-	if (process.platform != 'darwin') {
+app.on('window-all-closed', () => {
+	if (process.platform !== 'darwin') {
 		app.quit();
 	}
 });
@@ -226,12 +225,9 @@ ipc.on('settings-changed', () => {
 
 // Duplicate a given ruler.
 ipc.on('create-ruler', (evt, rulerInfo) => {
-
 	// Offset new duplicate ruler to make it more evident.
 	rulerInfo.x += 10;
 	rulerInfo.y += 10;
 
 	createNewRuler(rulerInfo);
 });
-
-
