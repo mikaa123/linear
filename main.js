@@ -55,7 +55,9 @@ function createNewRuler(windowInfo) {
  */
 function toggleCenterGuidesCommand() {
 	var activeRuler = BrowserWindow.getFocusedWindow();
-	activeRuler.send('toggle-center-guides');
+	if (activeRuler) {
+		activeRuler.send('toggle-center-guides');
+	}
 }
 
 /**
