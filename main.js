@@ -21,8 +21,8 @@ let helpWindow;
 
 /**
  * Create a ruler window and push it to the `rulers` array. The ruler window
- * is frameless, transparent and resizable. This type of windows might not be
- * well supported on every platforms.
+ * is frameless, transparent and resizable. This type of window might not be
+ * well supported on every platform.
  * @param {Object} windowInfo - Size and position of the window
  */
 function createNewRuler(windowInfo) {
@@ -52,10 +52,11 @@ function createNewRuler(windowInfo) {
 }
 
 /**
- * Toggle the visibility of the Center Guides
+ * Toggle the visibility of the Center Guides in the active ruler
  */
 function toggleCenterGuidesCommand() {
-	rulers.forEach((ruler) => ruler.send('toggle-center-guides'));
+	var activeRuler = BrowserWindow.getFocusedWindow();
+	activeRuler.send('toggle-center-guides');
 }
 
 /**
@@ -183,7 +184,7 @@ app.on('ready', function() {
 				accelerator: 'Command+Q',
 				click: () => app.quit()
 		}]
-	},{
+	}, {
 		label: 'Window',
 		role: 'window',
 		submenu: [{
@@ -232,3 +233,5 @@ ipc.on('create-ruler', (evt, rulerInfo) => {
 
 	createNewRuler(rulerInfo);
 });
+
+

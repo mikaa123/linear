@@ -24,7 +24,7 @@ let centerGuides = {
 	horizontal: document.querySelector('#guide__horizontal')
 };
 
-let centerGuidesAreVisible = false;
+let showCenterGuides = false;
 
 let baseFontSize; // Used to calculate em.
 
@@ -112,12 +112,12 @@ window.addEventListener('keyup', function(evt) {
 		right = 39,
 		shift = 16;
 
-	//	Grabbing the current position to add to it.
+	// Grabbing the current position to add to it.
 	let position = browserWindow.getPosition();
 	let x = position[0];
 	let y = position[1];
 
-	//	Figuring out if shiftKey is down to increment by 10px or just 1px
+	// Figuring out if shiftKey is down to increment by 10px or just 1px
 	let increment = isShiftDown ? 10 : 1;
 
 	switch (evt.keyCode) {
@@ -155,9 +155,10 @@ window.addEventListener('resize', updateMesures);
 ipc.on('settings-changed', loadSettings);
 ipc.on('toggle-center-guides', toggleCenterGuides);
 
-function toggleCenterGuides() {
-	centerGuidesAreVisible = !centerGuidesAreVisible;
-	if (centerGuidesAreVisible) {
+function toggleCenterGuides(event, data) {
+	showCenterGuides = !showCenterGuides;
+
+	if (showCenterGuides === true) {
 		centerGuides.vertical.classList.remove('hidden');
 		centerGuides.horizontal.classList.remove('hidden');
 	} else {
