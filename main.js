@@ -34,8 +34,8 @@ function createNewRuler(windowInfo) {
 		'alwaysOnTop': true,
 		'x': _windowInfo.x,
 		'y': _windowInfo.y,
-		'min-width': 151,
-		'min-height': 126,
+		'min-width': 101,
+		'min-height': 101,
 		'standard-window': false,
 		'use-content-size': true
 	});
