@@ -147,7 +147,7 @@ window.addEventListener('contextmenu', function (e) {
 
 document.querySelector('.ruler__inner__close').addEventListener('click', () => browserWindow.close());
 document.querySelector('.ruler__inner__theme').addEventListener('click', () => {
-	document.querySelector('.ruler__inner').classList.toggle('dark-theme');
+	toggleTheme();
 });
 
 window.addEventListener('resize', updateMesures);
@@ -165,6 +165,12 @@ function toggleCenterGuides() {
 		centerGuides.vertical.classList.add('hidden');
 		centerGuides.horizontal.classList.add('hidden');
 	}
+}
+
+function toggleTheme() {
+	document.querySelector('.ruler__inner').classList.toggle('dark-theme');
+	document.querySelector('#guide__vertical').classList.toggle('darkCenterGuides');
+	document.querySelector('#guide__horizontal').classList.toggle('darkCenterGuides');
 }
 
 loadSettings();

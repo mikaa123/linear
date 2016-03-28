@@ -142,6 +142,10 @@ body {
 	border-top: dashed lightgray 1px;
 }
 
+.darkCenterGuides {
+	border-color: #343434 !important;
+}
+
 .hidden {
 	display: none;
 }
