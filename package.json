@@ -4,6 +4,7 @@
   "description": "Ruler application with web-development in mind.",
   "main": "main.js",
   "scripts": {
+    "test": "xo",
     "start": "electron main.js",
     "package": "electron-packager . linear --platform=darwin --arch=all --version=0.35.4 --icon=src/assets/images/lrMacIcon.icns --out=bin --overwrite"
   },
@@ -21,7 +22,8 @@
   "homepage": "http://mikaa123.github.io/linear-website/",
   "devDependencies": {
     "electron-packager": "^5.1.1",
-    "electron-prebuilt": "^0.35.0"
+    "electron-prebuilt": "^0.35.0",
+    "xo": "^0.13.0"
   },
   "dependencies": {
     "electron-debug": "^0.5.1",
