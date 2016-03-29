@@ -11,7 +11,7 @@ let borders = {
 	top: document.querySelector('.ruler__inner__border--top'),
 	right: document.querySelector('.ruler__inner__border--right'),
 	bottom: document.querySelector('.ruler__inner__border--bottom'),
-	left: document.querySelector('.ruler__inner__border--left'),
+	left: document.querySelector('.ruler__inner__border--left')
 };
 
 let info = {
@@ -19,13 +19,20 @@ let info = {
 	height: document.querySelector('.ruler__inner__info__height')
 };
 
-let baseFontSize; // Used to calculate em.
+let centerGuides = {
+	vertical: document.querySelector('.center-guide__vertical'),
+	horizontal: document.querySelector('.center-guide__horizontal')
+};
+
+let showCenterGuides = false;
+
+// Used to calculate em.
+let baseFontSize;
 
 let isShiftDown = false;
 
 // This object holds the different strategies for displaying units.
 let unitStrategies = {
-
 	/**
 	 * Format into to pixels.
 	 * @param	{px} px - The number of px to display.
@@ -37,11 +44,11 @@ let unitStrategies = {
 
 	/**
 	 * Format into to em.
-	 * @param	{px} px - The number of px to convert to em.
+	 * @param {px} px - The number of px to convert to em.
 	 * @return {String} A formatted string displaying em.
 	 */
 	em(em) {
-		return `${em/baseFontSize}em`;
+		return `${em / baseFontSize}em`;
 	}
 };
 
@@ -85,7 +92,7 @@ contextMenu.append(new MenuItem({
 	}
 }));
 
-window.addEventListener('keydown', function(evt) {
+window.addEventListener('keydown', function (evt) {
 	let shift = 16;
 
 	switch (evt.keyCode) {
@@ -97,20 +104,20 @@ window.addEventListener('keydown', function(evt) {
 	}
 });
 
-window.addEventListener('keyup', function(evt) {
-	//	Keycodes for arrowkeys and shift.
+window.addEventListener('keyup', function (evt) {
+	// Keycodes for arrowkeys and shift.
 	let up = 38,
 		down = 40,
 		left = 37,
 		right = 39,
 		shift = 16;
 
-	//	Grabbing the current position to add to it.
+	// Grabbing the current position to add to it.
 	let position = browserWindow.getPosition();
 	let x = position[0];
 	let y = position[1];
 
-	//	Figuring out if shiftKey is down to increment by 10px or just 1px
+	// Figuring out if shiftKey is down to increment by 10px or just 1px
 	let increment = isShiftDown ? 10 : 1;
 
 	switch (evt.keyCode) {
@@ -140,11 +147,30 @@ window.addEventListener('contextmenu', function (e) {
 
 document.querySelector('.ruler__inner__close').addEventListener('click', () => browserWindow.close());
 document.querySelector('.ruler__inner__theme').addEventListener('click', () => {
-	document.querySelector('.ruler__inner').classList.toggle('dark-theme');
+	toggleTheme();
 });
 
 window.addEventListener('resize', updateMesures);
 
 ipc.on('settings-changed', loadSettings);
+ipc.on('toggle-center-guides', toggleCenterGuides);
+
+function toggleCenterGuides() {
+	showCenterGuides = !showCenterGuides;
+
+	if (showCenterGuides) {
+		centerGuides.vertical.classList.remove('hidden');
+		centerGuides.horizontal.classList.remove('hidden');
+	} else {
+		centerGuides.vertical.classList.add('hidden');
+		centerGuides.horizontal.classList.add('hidden');
+	}
+}
+
+function toggleTheme() {
+	document.querySelector('.ruler__inner').classList.toggle('dark-theme');
+	document.querySelector('#guide__vertical').classList.toggle('darkCenterGuides');
+	document.querySelector('#guide__horizontal').classList.toggle('darkCenterGuides');
+}
 
 loadSettings();

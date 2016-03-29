@@ -9,46 +9,60 @@ const Menu = electron.Menu;
 const path = require('path');
 const dataStore = require('./src/data-store');
 
-//	Uncomment this to see debugging tools.
+// Uncomment this to see debugging tools.
 // require('electron-debug')({
 //     showDevTools: true
 // });
 
 let rulers = [];
-let mainWindow;
 let settingsWindow;
 let helpWindow;
+let lastFocusedRuler
 
 /**
  * Create a ruler window and push it to the `rulers` array. The ruler window
- * is frameless, transparent and resizable. This type of windows might not be
- * well supported on every platforms.
+ * is frameless, transparent and resizable. This type of window might not be
+ * well supported on every platform.
  * @param {Object} windowInfo - Size and position of the window
  */
 function createNewRuler(windowInfo) {
 	let _windowInfo = windowInfo || {};
 	let ruler = new BrowserWindow({
-		width: _windowInfo.width || 151,
-		height: _windowInfo.height || 126,
-		frame: false,
-		transparent: true,
-		alwaysOnTop: true,
-		x: _windowInfo.x,
-		y: _windowInfo.y,
-		'min-width': 151,
-		'min-height': 126,
+		'width': _windowInfo.width || 201,
+		'height': _windowInfo.height || 151,
+		'frame': false,
+		'transparent': true,
+		'alwaysOnTop': true,
+		'x': _windowInfo.x,
+		'y': _windowInfo.y,
+		'min-width': 101,
+		'min-height': 101,
 		'standard-window': false,
 		'use-content-size': true
 	});
 
 	ruler.loadURL(`file://${__dirname}/src/app/ruler/ruler.html`);
 
-	ruler.on('closed', () => {
-		rulers.splice(rulers.indexOf(ruler), 1);
-		ruler = undefined;
-	});
+	ruler
+		.on('closed', () => {
+			rulers.splice(rulers.indexOf(ruler), 1);
+			ruler = undefined;
+		})
+		.on('focus', () => {
+			lastFocusedRuler = ruler;
+		});
 
+	lastFocusedRuler = ruler;
 	rulers.push(ruler);
+}
+
+/**
+ * Toggle the visibility of the Center Guides in the active ruler
+ */
+function toggleCenterGuidesCommand() {
+	if (lastFocusedRuler) {
+		lastFocusedRuler.send('toggle-center-guides');
+	}
 }
 
 /**
@@ -78,7 +92,7 @@ let hidden = false;
 
 /**
  * Toggle a ruler asynchronously and give back a promise.
- * @param	{BrowserWindow} ruler - The ruler to toggle
+ * @param {BrowserWindow} ruler - The ruler to toggle
  * @return {Promise}
  */
 let toggleRuler = (ruler) => {
@@ -98,7 +112,7 @@ function toggleRulerCommand() {
 
 	hidden = !hidden;
 
-	// Close all rulers sequencially. Doing otherwise doesn't toggle them
+	// Close all rulers sequentially. Doing otherwise doesn't toggle them
 	// properly. This is most likely an issue with Electron.
 	rulers.slice(1).reduce((acc, val) => {
 		return acc.then(() => toggleRuler(val));
@@ -106,56 +120,62 @@ function toggleRulerCommand() {
 }
 
 app.dock.hide();
-app.on('ready', function() {
+app.on('ready', function () {
 	let trayIcon = new Tray(path.join(__dirname, 'src/assets/images/lrTemplate.png'));
 
 	var trayMenuTemplate = [
-			{
-					label: 'New ruler',
-					accelerator: 'Command+Ctrl+R',
-					click: createNewRuler
-			},
-			{
-					label: 'Toggle rulers',
-					accelerator: 'Command+Ctrl+T',
-					click: toggleRulerCommand,
-					enabled: false
-			},
-			{
-				type: 'separator'
-			},
-			{
-				label: 'Settings',
-				click: () => {
-					if (settingsWindow) {
-						return;
-					}
-
-					settingsWindow = new BrowserWindow({
-						width: 200,
-						height: 170,
-						alwaysOnTop: true
-					});
-
-					settingsWindow.loadURL(`file://${__dirname}/src/app/settings/settings.html`);
-
-					settingsWindow.on('closed', () => {
-						settingsWindow = null;
-					});
+		{
+			label: 'New Ruler',
+			accelerator: 'Command+Ctrl+R',
+			click: createNewRuler
+		},
+		{
+			label: 'Toggle Rulers',
+			accelerator: 'Command+Ctrl+T',
+			click: toggleRulerCommand,
+			enabled: false
+		},
+		{
+			label: 'Toggle Center Guides',
+			accelerator: 'Command+;',
+			click: toggleCenterGuidesCommand,
+			enabled: true
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Settings',
+			click: () => {
+				if (settingsWindow) {
+					return;
 				}
-			},
-			{
-				label: 'Help',
-				click: showHelp
-			},
-			{
-				type: 'separator'
-			},
-			{
-					label: 'Quit',
-					accelerator: 'Command+Q',
-					click: () => app.quit()
+
+				settingsWindow = new BrowserWindow({
+					width: 200,
+					height: 170,
+					alwaysOnTop: true
+				});
+
+				settingsWindow.loadURL(`file://${__dirname}/src/app/settings/settings.html`);
+
+				settingsWindow.on('closed', () => {
+					settingsWindow = null;
+				});
 			}
+		},
+		{
+			label: 'Help',
+			click: showHelp
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Quit',
+			accelerator: 'Command+Q',
+			click: () => app.quit()
+		}
 	];
 
 	let trayMenu = Menu.buildFromTemplate(trayMenuTemplate);
@@ -166,11 +186,11 @@ app.on('ready', function() {
 	let appMenu = Menu.buildFromTemplate([{
 		label: require('electron').app.getName(),
 		submenu: [{
-				label: 'Quit',
-				accelerator: 'Command+Q',
-				click: () => app.quit()
+			label: 'Quit',
+			accelerator: 'Command+Q',
+			click: () => app.quit()
 		}]
-	},{
+	}, {
 		label: 'Window',
 		role: 'window',
 		submenu: [{
@@ -182,10 +202,11 @@ app.on('ready', function() {
 	Menu.setApplicationMenu(appMenu);
 
 	// We observe changes on the `rulers` array to enable/disable the toggle menu.
-	Array.observe(rulers, () => toggleRulersMenu.enabled = !!rulers.length);
+	Array.observe(rulers, () => toggleRulersMenu.enabled = Boolean(rulers.length));
 
 	globalShortcut.register('Command + Control + T', toggleRulerCommand);
 	globalShortcut.register('Command + Control + R', createNewRuler);
+	globalShortcut.register('Command + ;', toggleCenterGuidesCommand);
 
 	// Show help the first time the app is launched.
 	if (dataStore.readSettings('tutorialShown')) {
@@ -196,9 +217,9 @@ app.on('ready', function() {
 	}
 });
 
-// We make sure not to quit when every windows are closed.
-app.on('window-all-closed', function() {
-	if (process.platform != 'darwin') {
+// We make sure not to quit when all windows are closed.
+app.on('window-all-closed', () => {
+	if (process.platform !== 'darwin') {
 		app.quit();
 	}
 });
@@ -211,8 +232,7 @@ ipc.on('settings-changed', () => {
 
 // Duplicate a given ruler.
 ipc.on('create-ruler', (evt, rulerInfo) => {
-
-	//	Offset new duplicate ruler to make it more evident.
+	// Offset new duplicate ruler to make it more evident.
 	rulerInfo.x += 10;
 	rulerInfo.y += 10;
 
