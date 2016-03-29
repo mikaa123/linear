@@ -28,8 +28,8 @@ let lastFocusedRuler
 function createNewRuler(windowInfo) {
 	let _windowInfo = windowInfo || {};
 	let ruler = new BrowserWindow({
-		'width': _windowInfo.width || 151,
-		'height': _windowInfo.height || 126,
+		'width': _windowInfo.width || 201,
+		'height': _windowInfo.height || 151,
 		'frame': false,
 		'transparent': true,
 		'alwaysOnTop': true,
