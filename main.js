@@ -54,7 +54,7 @@ function createNewRuler(windowInfo) {
  * Toggle the visibility of the Center Guides in the active ruler
  */
 function toggleCenterGuidesCommand() {
-	var activeRuler = BrowserWindow.getFocusedWindow();
+	let activeRuler = BrowserWindow.getFocusedWindow();
 	if (activeRuler) {
 		activeRuler.send('toggle-center-guides');
 	}
