@@ -17,6 +17,7 @@ const dataStore = require('./src/data-store');
 let rulers = [];
 let settingsWindow;
 let helpWindow;
+let lastFocusedRuler
 
 /**
  * Create a ruler window and push it to the `rulers` array. The ruler window
@@ -42,11 +43,16 @@ function createNewRuler(windowInfo) {
 
 	ruler.loadURL(`file://${__dirname}/src/app/ruler/ruler.html`);
 
-	ruler.on('closed', () => {
-		rulers.splice(rulers.indexOf(ruler), 1);
-		ruler = undefined;
-	});
+	ruler
+		.on('closed', () => {
+			rulers.splice(rulers.indexOf(ruler), 1);
+			ruler = undefined;
+		})
+		.on('focus', () => {
+			lastFocusedRuler = ruler;
+		});
 
+	lastFocusedRuler = ruler;
 	rulers.push(ruler);
 }
 
@@ -54,9 +60,8 @@ function createNewRuler(windowInfo) {
  * Toggle the visibility of the Center Guides in the active ruler
  */
 function toggleCenterGuidesCommand() {
-	let activeRuler = BrowserWindow.getFocusedWindow();
-	if (activeRuler) {
-		activeRuler.send('toggle-center-guides');
+	if (lastFocusedRuler) {
+		lastFocusedRuler.send('toggle-center-guides');
 	}
 }
 
