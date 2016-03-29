@@ -14,10 +14,10 @@ const dataStore = require('./src/data-store');
 //     showDevTools: true
 // });
 
-let rulers = [];
+const rulers = [];
 let settingsWindow;
 let helpWindow;
-let lastFocusedRuler
+let lastFocusedRuler;
 
 /**
  * Create a ruler window and push it to the `rulers` array. The ruler window
@@ -26,7 +26,7 @@ let lastFocusedRuler
  * @param {Object} windowInfo - Size and position of the window
  */
 function createNewRuler(windowInfo) {
-	let _windowInfo = windowInfo || {};
+	const _windowInfo = windowInfo || {};
 	let ruler = new BrowserWindow({
 		'width': _windowInfo.width || 201,
 		'height': _windowInfo.height || 151,
@@ -95,8 +95,8 @@ let hidden = false;
  * @param {BrowserWindow} ruler - The ruler to toggle
  * @return {Promise}
  */
-let toggleRuler = (ruler) => {
-	return new Promise((resolve) => setTimeout(() => {
+const toggleRuler = ruler => {
+	return new Promise(resolve => setTimeout(() => {
 		ruler[hidden ? 'hide' : 'show']();
 		resolve();
 	}));
@@ -120,10 +120,10 @@ function toggleRulerCommand() {
 }
 
 app.dock.hide();
-app.on('ready', function () {
-	let trayIcon = new Tray(path.join(__dirname, 'src/assets/images/lrTemplate.png'));
+app.on('ready', () => {
+	const trayIcon = new Tray(path.join(__dirname, 'src/assets/images/lrTemplate.png'));
 
-	var trayMenuTemplate = [
+	const trayMenuTemplate = [
 		{
 			label: 'New Ruler',
 			accelerator: 'Command+Ctrl+R',
@@ -178,12 +178,12 @@ app.on('ready', function () {
 		}
 	];
 
-	let trayMenu = Menu.buildFromTemplate(trayMenuTemplate);
-	let toggleRulersMenu = trayMenu.items[1];
+	const trayMenu = Menu.buildFromTemplate(trayMenuTemplate);
+	const toggleRulersMenu = trayMenu.items[1];
 	trayIcon.setContextMenu(trayMenu);
 
 	// Application menu
-	let appMenu = Menu.buildFromTemplate([{
+	const appMenu = Menu.buildFromTemplate([{
 		label: require('electron').app.getName(),
 		submenu: [{
 			label: 'Quit',
@@ -202,7 +202,9 @@ app.on('ready', function () {
 	Menu.setApplicationMenu(appMenu);
 
 	// We observe changes on the `rulers` array to enable/disable the toggle menu.
-	Array.observe(rulers, () => toggleRulersMenu.enabled = Boolean(rulers.length));
+	Array.observe(rulers, () => {
+		toggleRulersMenu.enabled = Boolean(rulers.length);
+	});
 
 	globalShortcut.register('Command + Control + T', toggleRulerCommand);
 	globalShortcut.register('Command + Control + R', createNewRuler);
@@ -227,7 +229,7 @@ app.on('window-all-closed', () => {
 // Let rulers know that a config changed. For instance, the application uses
 // 'em' instead of 'px' as units.
 ipc.on('settings-changed', () => {
-	rulers.forEach((ruler) => ruler.send('settings-changed'));
+	rulers.forEach(ruler => ruler.send('settings-changed'));
 });
 
 // Duplicate a given ruler.

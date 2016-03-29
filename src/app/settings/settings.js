@@ -14,7 +14,7 @@ const inputs = {
  * @param {Function} cb - The function to decorate.
  * @return {Function} The decorated function.
  */
-let settingsChangedDecorator = (cb) => (evt) => {
+const settingsChangedDecorator = cb => evt => {
 	cb(evt);
 	ipc.send('settings-changed');
 };
@@ -23,20 +23,20 @@ let settingsChangedDecorator = (cb) => (evt) => {
  * Load saved data from the `dataStore` and populate the view with it.
  */
 function loadSettings() {
-	let unit = dataStore.readSettings('unit') || 'px';
-	let size = dataStore.readSettings('size') || '16';
+	const unit = dataStore.readSettings('unit') || 'px';
+	const size = dataStore.readSettings('size') || '16';
 
 	inputs[unit].checked = true;
 	inputs.size.value = size;
 }
 
-['px', 'em'].forEach((radio) => {
-	inputs[radio].addEventListener('change', settingsChangedDecorator((evt) => {
+['px', 'em'].forEach(radio => {
+	inputs[radio].addEventListener('change', settingsChangedDecorator(evt => {
 		dataStore.saveSettings('unit', evt.target.value);
 	}));
 });
 
-inputs.size.addEventListener('keyup', settingsChangedDecorator((evt) => {
+inputs.size.addEventListener('keyup', settingsChangedDecorator(evt => {
 	dataStore.saveSettings('size', evt.target.value);
 }));
 

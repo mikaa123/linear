@@ -28,5 +28,12 @@
   "dependencies": {
     "electron-debug": "^0.5.1",
     "nconf": "^0.8.2"
+  },
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "node",
+      "browser"
+    ]
   }
 }
