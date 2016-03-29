@@ -121,21 +121,21 @@ body {
 	color: black;
 }
 
-#guide__vertical, #guide__horizontal {
+.center-guide {
 	position: fixed;
 	box-sizing: border-box;
 }
 
-#guide__vertical {
-	top:0;
+.center-guide__vertical {
+	top: 0;
 	left: 50%;
 	height: 100%;
 	width: 1px;
 	border-right: dashed lightgray 1px;
 }
 
-#guide__horizontal {
-	top:50%;
+.center-guide__horizontal {
+	top: 50%;
 	left: 0;
 	width: 100%;
 	height: 1px;

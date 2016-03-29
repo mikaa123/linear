@@ -20,8 +20,8 @@ let info = {
 };
 
 let centerGuides = {
-	vertical: document.querySelector('#guide__vertical'),
-	horizontal: document.querySelector('#guide__horizontal')
+	vertical: document.querySelector('.center-guide__vertical'),
+	horizontal: document.querySelector('.center-guide__horizontal')
 };
 
 let showCenterGuides = false;
