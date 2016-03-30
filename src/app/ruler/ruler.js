@@ -7,19 +7,19 @@ const ipc = require('electron').ipcRenderer;
 const Menu = remote.Menu;
 const MenuItem = remote.MenuItem;
 
-let borders = {
+const borders = {
 	top: document.querySelector('.ruler__inner__border--top'),
 	right: document.querySelector('.ruler__inner__border--right'),
 	bottom: document.querySelector('.ruler__inner__border--bottom'),
 	left: document.querySelector('.ruler__inner__border--left')
 };
 
-let info = {
+const info = {
 	width: document.querySelector('.ruler__inner__info__width'),
 	height: document.querySelector('.ruler__inner__info__height')
 };
 
-let centerGuides = {
+const centerGuides = {
 	vertical: document.querySelector('.center-guide__vertical'),
 	horizontal: document.querySelector('.center-guide__horizontal')
 };
@@ -32,7 +32,7 @@ let baseFontSize;
 let isShiftDown = false;
 
 // This object holds the different strategies for displaying units.
-let unitStrategies = {
+const unitStrategies = {
 	/**
 	 * Format into to pixels.
 	 * @param	{px} px - The number of px to display.
@@ -58,7 +58,7 @@ let displayStrategy;
  * Load saved data from the `dataStore` and populate the view with it.
  */
 function loadSettings() {
-	let unit = dataStore.readSettings('unit') || 'px';
+	const unit = dataStore.readSettings('unit') || 'px';
 	baseFontSize = dataStore.readSettings('size') || '16';
 
 	displayStrategy = unitStrategies[unit];
@@ -73,15 +73,15 @@ function updateMesures() {
 	info.height.textContent = displayStrategy(borders.bottom.getBoundingClientRect().top - borders.top.getBoundingClientRect().top);
 }
 
-let contextMenu = new Menu();
+const contextMenu = new Menu();
 contextMenu.append(new MenuItem({
 	label: 'Duplicate',
 
 	// Duplicate the current ruler. We send position information to the main
 	// process so that it can create a new window at the same spot.
 	click: () => {
-		let bounds = browserWindow.getBounds();
-		let position = browserWindow.getPosition();
+		const bounds = browserWindow.getBounds();
+		const position = browserWindow.getPosition();
 
 		ipc.send('create-ruler', {
 			x: position[0],
@@ -92,8 +92,8 @@ contextMenu.append(new MenuItem({
 	}
 }));
 
-window.addEventListener('keydown', function (evt) {
-	let shift = 16;
+window.addEventListener('keydown', evt => {
+	const shift = 16;
 
 	switch (evt.keyCode) {
 		case shift:
@@ -104,21 +104,21 @@ window.addEventListener('keydown', function (evt) {
 	}
 });
 
-window.addEventListener('keyup', function (evt) {
+window.addEventListener('keyup', evt => {
 	// Keycodes for arrowkeys and shift.
-	let up = 38,
-		down = 40,
-		left = 37,
-		right = 39,
-		shift = 16;
+	const up = 38;
+	const down = 40;
+	const left = 37;
+	const right = 39;
+	const shift = 16;
 
 	// Grabbing the current position to add to it.
-	let position = browserWindow.getPosition();
-	let x = position[0];
-	let y = position[1];
+	const position = browserWindow.getPosition();
+	const x = position[0];
+	const y = position[1];
 
 	// Figuring out if shiftKey is down to increment by 10px or just 1px
-	let increment = isShiftDown ? 10 : 1;
+	const increment = isShiftDown ? 10 : 1;
 
 	switch (evt.keyCode) {
 		case shift:
@@ -140,7 +140,7 @@ window.addEventListener('keyup', function (evt) {
 	}
 });
 
-window.addEventListener('contextmenu', function (e) {
+window.addEventListener('contextmenu', e => {
 	e.preventDefault();
 	contextMenu.popup(remote.getCurrentWindow());
 }, false);
@@ -169,8 +169,8 @@ function toggleCenterGuides() {
 
 function toggleTheme() {
 	document.querySelector('.ruler__inner').classList.toggle('dark-theme');
-	document.querySelector('#guide__vertical').classList.toggle('darkCenterGuides');
-	document.querySelector('#guide__horizontal').classList.toggle('darkCenterGuides');
+	document.querySelector('.center-guide__vertical').classList.toggle('darkCenterGuides');
+	document.querySelector('.center-guide__horizontal').classList.toggle('darkCenterGuides');
 }
 
 loadSettings();
