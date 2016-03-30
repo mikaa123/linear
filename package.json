@@ -6,7 +6,7 @@
   "scripts": {
     "test": "xo",
     "start": "electron main.js",
-    "package": "electron-packager . linear --platform=darwin --arch=all --version=0.35.4 --icon=src/assets/images/lrMacIcon.icns --out=bin --overwrite"
+    "package": "electron-packager . linear --platform=darwin --arch=all --version=0.35.4 --icon=src/assets/images/lrMacIcon.icns --out=dist --overwrite"
   },
   "repository": {
     "type": "git",
