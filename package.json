@@ -1,6 +1,6 @@
 {
   "name": "linear",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "description": "Ruler application with web-development in mind.",
   "main": "main.js",
   "scripts": {
