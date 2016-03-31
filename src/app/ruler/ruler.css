@@ -78,7 +78,7 @@ body {
 .ruler__inner__info {
 	background-color: rgba(34,34,34,0.3);
 	position: absolute;
-	bottom: 1em;
+	bottom: .6em;
 	left: 4.9em;
 	padding: 3px 5px 3px 3px;
 	font-size: 1.1em;
@@ -93,8 +93,7 @@ body {
 }
 
 .dark-theme .ruler__inner__info {
-	background-color: rgba(255,255,255,0.3);
-	color: black;
+	background-color: rgba(255,255,255,0.7);
 }
 
 .ruler__inner__info__width:before,
