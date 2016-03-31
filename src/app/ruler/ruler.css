@@ -76,17 +76,38 @@ body {
 }
 
 .ruler__inner__info {
+	background-color: rgba(34,34,34,0.3);
 	position: absolute;
-	bottom: 1.2em;
-	left: 5.6em;
-	width: 6.5em;
+	bottom: 1em;
+	left: 4.9em;
+	padding: 3px 5px 3px 3px;
 	font-size: 1.1em;
 	color: white;
+	z-index: 99;
+}
+
+@media (max-width:152px) {
+	.ruler__inner__info {
+		left: 1em;
+	}
+}
+
+.dark-theme .ruler__inner__info {
+	background-color: rgba(255,255,255,0.3);
+	color: black;
+}
+
+.ruler__inner__info__width:before,
+.ruler__inner__info__height:before {
+	width:18px;
+	text-align: center;
+	display: inline-block;
 }
 
 .ruler__inner__info__width:before {
 	content: 'W: ';
 }
+
 .ruler__inner__info__height:before {
 	content: 'H: ';
 }
@@ -148,4 +169,28 @@ body {
 
 .hidden {
 	display: none;
+}
+
+.shdw {
+	-webkit-box-shadow: 1px 1px 1px 0 rgba(119,119,119,0.9);
+	-moz-box-shadow: 1px 1px 1px 0 rgba(119,119,119,0.9);
+	box-shadow: 1px 1px 1px 0 rgba(119,119,119,0.9);
+}
+
+.txtshdw {
+	text-shadow: 1px 1px 1px rgba(119, 119, 119, 0.9);
+}
+
+.dark-theme .shdw {
+	-webkit-box-shadow: 1px 1px 1px 0 rgba(255,255,255,0.9);
+	-moz-box-shadow: 1px 1px 1px 0 rgba(255,255,255,0.9);
+	box-shadow: 1px 1px 1px 0 rgba(255,255,255,0.9);
+}
+
+.dark-theme .txtshdw {
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.icon {
+	/* placeholder for custom css */
 }
