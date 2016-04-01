@@ -10,7 +10,7 @@ short when inspecting the DOM of a document, since they often inject overlay
 elements themselves.
 * Uses `px` or `em` values; set the default font-size to your convenience.
 * Create multiple rulers.
-* Duplicate a ruler, conserving its height and width. Really useful when checking
+* Duplicate a ruler, preserving its height and width. Really useful when checking
 margins.
 * It adapts to dark and light backgrounds.
 * System-wide shortcuts to hide/show rulers.
