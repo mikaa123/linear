@@ -180,16 +180,6 @@ body {
     text-shadow: 1px 1px 1px rgba(119, 119, 119, 0.9);
 }
 
-.dark-theme .shdw {
-    -webkit-box-shadow: 1px 1px 1px 0 rgba(255,255,255,0.9);
-    -moz-box-shadow: 1px 1px 1px 0 rgba(255,255,255,0.9);
-    box-shadow: 1px 1px 1px 0 rgba(255,255,255,0.9);
-}
-
-.dark-theme .txtshdw {
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.9);
-}
-
 .themeMenu {
     transition: all 0.3s ease;
     color: white;

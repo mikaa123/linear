@@ -121,9 +121,7 @@ function toggleRulerCommand() {
 
 app.dock.hide();
 app.on('ready', () => {
-	dataStore.init().then(() => {
-		setup();
-	});
+	dataStore.init().then(setup);
 });
 
 function setup() {

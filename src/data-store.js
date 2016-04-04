@@ -56,7 +56,7 @@ function init() {
 		// get a list of files (if any) at the default location
 		const settingsFiles = shell.ls(settingsPath());
 
-		if (settingsFiles.length === 0) {
+		if (!settingsFiles.length) {
 			// No settings exist. Copy the defaults to the settings location
 			shell.cp('-R', defaultsPath(), settingsPath());
 		} else if (settingsFiles.indexOf('themes') === -1) {

@@ -7,8 +7,6 @@ const ipc = require('electron').ipcRenderer;
 const Menu = remote.Menu;
 const MenuItem = remote.MenuItem;
 
-require("native-promise-only");
-
 const borders = {
 	top: document.querySelector('.ruler__inner__border--top'),
 	right: document.querySelector('.ruler__inner__border--right'),
