@@ -47,6 +47,12 @@ function readSettings(settingKey) {
 // Setup/check the .linear config files
 function init() {
 	return new Promise(resolve => {
+		// does the user have a .linear file (not a directory)?
+		if (shell.test('-f', settingsPath())) {
+			// remove the .linear file from older installations of linear
+			shell.rm('-rf', settingsPath());
+		}
+
 		// get a list of files (if any) at the default location
 		const settingsFiles = shell.ls(settingsPath());
 
