@@ -1,7 +1,7 @@
 html,
-body {
-	height: 100%;
-}
+ body {
+	 height: 100%;
+ }
 
 html {
 	font-size: 10px;
@@ -192,4 +192,39 @@ body {
 
 .icon {
 	/* placeholder for custom css */
+}
+
+.themeMenu {
+	color: white;
+	position: absolute;
+	bottom: 3.6em;
+	right: 4.1em;
+	background-color: rgba(34,34,34,0.7);
+	padding: 5px;
+	font-size: 12px;
+}
+
+.themeMenu ul {
+	padding: 0;
+}
+
+.themeMenu ul li {
+	list-style: none;
+	padding-right: 8px;
+}
+
+.themeMenu ul li:hover {
+	background-color: black;
+	cursor: pointer;
+}
+
+.themeMenu ul li:before {
+	content: ' ';
+	width: 16px;
+	display: inline-block;
+}
+
+.checkmark:before {
+	content: "XXX";
+	display: inline-block;
 }

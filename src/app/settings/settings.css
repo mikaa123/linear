@@ -3,14 +3,47 @@ body {
 	padding-left: 1em;
 }
 
+h3 {
+	margin-bottom: 5px;
+	color: darkgray;
+}
+
 h1 {
 	font-size: 1.4em;
+	border-bottom: solid thin lightgray;
 }
 
 label {
-	display: block;
+	display: inline-block;
+	width:70px;
 }
 
 input {
 	font-family: "Open Sans";
 }
+
+span {
+	display: block;
+}
+
+#size {
+	width: 40px;
+}
+
+p {
+	padding: 0 0 8px 0;
+	margin: 0;
+	font-size: 12px;
+}
+
+a:link, a:visited {
+	font-size: 11px;
+	text-decoration: none;
+	display: block;
+	padding: 7px 3px 0 0;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+

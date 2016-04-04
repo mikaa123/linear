@@ -9,9 +9,18 @@
 	<body>
 		<form>
 			<h1>Settings</h1>
-			<label><input type="radio" value="px" id="px" name="unit"> Use px</label>
-			<label><input type="radio" value="em" id="em" name="unit"> Use em</label>
-			<input type="number" name="size" placeholder="16px">
+
+			<h3>Units</h3>
+			<span><label for="px">Use px:</label><input type="radio" value="px" id="px" name="unit"></span>
+			<span><label for="em">Use em:</label><input type="radio" value="em" id="em" name="unit"></span>
+			<span><label for="size">Size:</label><input id="size" type="number" name="size" placeholder="16px"></span>
+
+			<h3>Default Theme</h3>
+			<p>Select the theme to use when linear is launched.</p>
+			<select id="defaultTheme">
+				<!-- options will be injected here -->
+			</select>
+			<a href="#" id="update-all-themes">Apply theme to all open rulers</a>
 		</form>
 		<script src="settings.js" charset="utf-8"></script>
 	</body>
