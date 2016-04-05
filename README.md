@@ -32,21 +32,22 @@ $ brew cask install linear
 Linear uses a transparent, resizable frameless window, which is rather experimental.
 This is why Mac is the only supported platform at the moment.
 
-## Contributing
-Any contribution is welcome, in fact, you'll receive an instant hug for doing one. ;)
-Linear was built as a side project and is a little rough around the edges, so even bug reports would be great.
-
 ## Customizable Themes
 Creating your own linear theme is as simple as adding a custom css file to linear's theme directory.
 Linear will use the name of your custom css file as the name of your theme. Follow these steps to get you started:
 
-1. **Copy and rename** the `universal.css` file.
-2. **Save** your custom css to linear's theme directory: `/Users/<username>/.linear/themes`
-3. **Open** (or restart) the linear application. 
-4. **Select** your new theme by clicking on the 'theme icon' on the bottom left corner of your ruler. 
-5. You can also set your new theme to the Default Theme in settings menu.
+1. **Copy** the `universal.css` file and **rename** it to your new theme name (e.g. `my-awesome-theme.css`).
+2. **Edit** your custom css file to get the look you want.
+3. **Save** your custom css to linear's theme directory: `/Users/<username>/.linear/themes`
+4. **Open** (or restart) the linear application. 
+5. **Select** your new theme by clicking on the 'theme icon' on the bottom right corner of your ruler. 
+6. You can also set your new theme to the Default Theme in the settings menu.
 
-**Tip:** Linear will titlecase your custom css file names for you. For example, a file named `my-awesome-theme.css` will be seen in linear as `My Awesome Theme`.
+**Tip:** Linear will titlecase your css files to generate your theme name. For example, a file named `my-awesome-theme.css` will be seen in linear as `My Awesome Theme`.
+
+## Contributing
+Any contribution is welcome, in fact, you'll receive an instant hug for doing one. ;)
+Linear was built as a side project and is a little rough around the edges, so even bug reports would be great.
  
 ### Development
 After you've cloned or forked the repo, you'll need to install the dependencies (like Electron, etc):
