@@ -37,10 +37,6 @@ body {
     transition: all .5s ease-out;
 }
 
-.ruler:hover {
-    /*background-color: rgba(0, 0, 0, 0.4);*/
-}
-
 .ruler__inner {
     position: relative;
     width: 100%;
@@ -92,10 +88,6 @@ body {
     }
 }
 
-.dark-theme .ruler__inner__info {
-    background-color: rgba(255,255,255,0.7);
-}
-
 .ruler__inner__info__width:before,
 .ruler__inner__info__height:before {
     width:18px;
@@ -134,13 +126,6 @@ body {
     cursor: pointer;
 }
 
-.dark-theme .ruler__inner__border,
-.dark-theme .ruler__inner__info,
-.dark-theme .ruler__inner__title {
-    border-color: black !important;
-    color: black;
-}
-
 .center-guide {
     position: fixed;
     box-sizing: border-box;
@@ -160,10 +145,6 @@ body {
     width: 100%;
     height: 1px;
     border-top: dashed lightgray 1px;
-}
-
-.darkCenterGuides {
-    border-color: #343434 !important;
 }
 
 .hidden {
