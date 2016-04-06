@@ -34,8 +34,8 @@ let isShiftDown = false;
 // This object holds the different strategies for displaying units.
 const unitStrategies = {
 	/**
-	 * Format into to pixels.
-	 * @param	{px} px - The number of px to display.
+	 * The px format.
+	 * @param {Number} px - The number of px to display.
 	 * @return {String} A formatted string displaying px.
 	 */
 	px(px) {
@@ -43,8 +43,8 @@ const unitStrategies = {
 	},
 
 	/**
-	 * Format into to em.
-	 * @param {px} px - The number of px to convert to em.
+	 * The em format.
+	 * @param {Number} em - The number to convert to em.
 	 * @return {String} A formatted string displaying em.
 	 */
 	em(em) {
@@ -62,13 +62,13 @@ function loadSettings() {
 	baseFontSize = dataStore.readSettings('size') || '16';
 
 	displayStrategy = unitStrategies[unit];
-	updateMesures();
+	updateMeasures();
 }
 
 /**
  * Update the values in the view based on the `displayStrategy`.
  */
-function updateMesures() {
+function updateMeasures() {
 	info.width.textContent = displayStrategy(borders.right.getBoundingClientRect().left - borders.left.getBoundingClientRect().left);
 	info.height.textContent = displayStrategy(borders.bottom.getBoundingClientRect().top - borders.top.getBoundingClientRect().top);
 }
@@ -146,11 +146,8 @@ window.addEventListener('contextmenu', e => {
 }, false);
 
 document.querySelector('.ruler__inner__close').addEventListener('click', () => browserWindow.close());
-document.querySelector('.ruler__inner__theme').addEventListener('click', () => {
-	toggleTheme();
-});
 
-window.addEventListener('resize', updateMesures);
+window.addEventListener('resize', updateMeasures);
 
 ipc.on('settings-changed', loadSettings);
 ipc.on('toggle-center-guides', toggleCenterGuides);
@@ -165,12 +162,6 @@ function toggleCenterGuides() {
 		centerGuides.vertical.classList.add('hidden');
 		centerGuides.horizontal.classList.add('hidden');
 	}
-}
-
-function toggleTheme() {
-	document.querySelector('.ruler__inner').classList.toggle('dark-theme');
-	document.querySelector('.center-guide__vertical').classList.toggle('darkCenterGuides');
-	document.querySelector('.center-guide__horizontal').classList.toggle('darkCenterGuides');
 }
 
 loadSettings();

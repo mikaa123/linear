@@ -5,7 +5,12 @@
 		<title>Ruler</title>
 		<link href="../../assets/styles/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 		<link href="../../assets/styles/common.css" rel="stylesheet" type="text/css"/>
-		<link href="ruler.css" rel="stylesheet" type="text/css"/>
+		<link id="rulertheme" href="../../defaults/config/.linear/themes/universal.css" rel="stylesheet" type="text/css"/>
+		<script async>
+			window.onload = function() {
+				initPageTheme();
+			}
+		</script>
 	</head>
 	<body>
 		<div class="center-guide center-guide__vertical hidden"></div>
@@ -24,10 +29,14 @@
 				<div class="ruler__inner__border ruler__inner__border--top shdw"></div>
 				<div class="ruler__inner__border ruler__inner__border--bottom shdw"></div>
 
-				<div class="ruler__inner__close close icon"><i class="fa fa-times-circle"></i></div>
-				<div class="ruler__inner__theme icon"><i class="fa fa-sun-o"></i></div>
+				<div class="ruler__inner__close close"><i class="fa fa-times-circle"></i></div>
+				<div class="ruler__inner__theme themeIcon"><i class="fa fa-sun-o"></i></div>
+				<div class="themeMenu zeroOpacity">
+					<!-- inject themes here -->
+				</div>
 			</div>
 		</div>
-		<script src="ruler.js" charset="utf-8"></script>
+		<script src="js/ruler.js" charset="utf-8"></script>
+		<script src="js/themes.js" charset="utf-8"></script>
 	</body>
 </html>

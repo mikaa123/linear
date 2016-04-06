@@ -9,10 +9,10 @@ const Menu = electron.Menu;
 const path = require('path');
 const dataStore = require('./src/data-store');
 
-// Uncomment this to see debugging tools.
-// require('electron-debug')({
-//     showDevTools: true
-// });
+// Show debug tools in debugging mode.
+if (dataStore.debug()) {
+	require('electron-debug')({showDevTools: true});
+}
 
 const rulers = [];
 let settingsWindow;
@@ -121,6 +121,10 @@ function toggleRulerCommand() {
 
 app.dock.hide();
 app.on('ready', () => {
+	dataStore.init().then(setup);
+});
+
+function setup() {
 	const trayIcon = new Tray(path.join(__dirname, 'src/assets/images/lrTemplate.png'));
 
 	const trayMenuTemplate = [
@@ -152,8 +156,8 @@ app.on('ready', () => {
 				}
 
 				settingsWindow = new BrowserWindow({
-					width: 200,
-					height: 170,
+					width: 325,
+					height: 325,
 					alwaysOnTop: true
 				});
 
@@ -217,7 +221,7 @@ app.on('ready', () => {
 	} else {
 		showHelp();
 	}
-});
+}
 
 // We make sure not to quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -230,6 +234,11 @@ app.on('window-all-closed', () => {
 // 'em' instead of 'px' as units.
 ipc.on('settings-changed', () => {
 	rulers.forEach(ruler => ruler.send('settings-changed'));
+});
+
+// Update the themes of all open rulers on default theme change
+ipc.on('apply-default-theme', (evt, data) => {
+	rulers.forEach(ruler => ruler.send('update-theme', {filename: data.filename}));
 });
 
 // Duplicate a given ruler.
