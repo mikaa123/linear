@@ -239,6 +239,12 @@ ipc.on('settings-changed', () => {
 // Update the themes of all open rulers on default theme change
 ipc.on('apply-default-theme', (evt, data) => {
 	rulers.forEach(ruler => ruler.send('update-theme', {filename: data.filename}));
+
+	// Focus all rulers temporarily to apply the changes.
+	// See: https://github.com/mikaa123/linear/issues/27
+	setTimeout(() => {
+		rulers.forEach(ruler => ruler.focus());
+	}, 300);
 });
 
 // Duplicate a given ruler.
