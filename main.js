@@ -1,4 +1,5 @@
 'use strict';
+const path = require('path');
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -6,7 +7,6 @@ const globalShortcut = electron.globalShortcut;
 const ipc = electron.ipcMain;
 const Tray = electron.Tray;
 const Menu = electron.Menu;
-const path = require('path');
 const dataStore = require('./src/data-store');
 
 // Show debug tools in debugging mode.
@@ -14,7 +14,7 @@ if (dataStore.debug()) {
 	require('electron-debug')({showDevTools: true});
 }
 
-const rulers = [];
+let rulers;
 let settingsWindow;
 let helpWindow;
 let lastFocusedRuler;
@@ -206,8 +206,12 @@ function setup() {
 	Menu.setApplicationMenu(appMenu);
 
 	// We observe changes on the `rulers` array to enable/disable the toggle menu.
-	Array.observe(rulers, () => {
-		toggleRulersMenu.enabled = Boolean(rulers.length);
+	rulers = new Proxy([], { // eslint-disable-line
+		set(target, property, value) {
+			target[property] = value;
+			toggleRulersMenu.enabled = Boolean(target.length);
+			return true;
+		}
 	});
 
 	globalShortcut.register('Command + Control + T', toggleRulerCommand);
