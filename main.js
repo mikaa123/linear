@@ -18,6 +18,7 @@ let rulers;
 let settingsWindow;
 let helpWindow;
 let lastFocusedRuler;
+let showRuler = false;
 
 /**
  * Create a ruler window and push it to the `rulers` array. The ruler window
@@ -88,8 +89,6 @@ function showHelp() {
 	});
 }
 
-let hidden = false;
-
 /**
  * Toggle a ruler asynchronously and give back a promise.
  * @param {BrowserWindow} ruler - The ruler to toggle
@@ -97,7 +96,7 @@ let hidden = false;
  */
 const toggleRuler = ruler => {
 	return new Promise(resolve => setTimeout(() => {
-		ruler[hidden ? 'hide' : 'show']();
+		ruler[showRuler ? 'show' : 'hide']();
 		resolve();
 	}));
 };
@@ -110,7 +109,7 @@ function toggleRulerCommand() {
 		return;
 	}
 
-	hidden = !hidden;
+	showRuler = !showRuler;
 
 	// Close all rulers sequentially. Doing otherwise doesn't toggle them
 	// properly. This is most likely an issue with Electron.
