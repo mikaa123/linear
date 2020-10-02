@@ -1,13 +1,12 @@
 'use strict';
 
-const ipc = require('electron').ipcRenderer;
-const remote = require('electron').remote;
+const { ipcRenderer, remote } = require('electron');
 const browserWindow = remote.getCurrentWindow();
 const dataStore = require('../../data-store');
 
 // When the help menu is loaded, we create a ruler
 // so the user can get a feel of how to use them.
-ipc.send('create-ruler', {
+ipcRenderer.send('create-ruler', {
 	x: browserWindow.getPosition()[0] + 274,
 	y: browserWindow.getPosition()[1] + 250
 });
