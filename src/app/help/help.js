@@ -20,8 +20,8 @@ document.querySelector('.next-step').addEventListener('click', () => {
 	if (currentStep === 5) {
 		document.querySelector('.next-step .btn__inner').textContent = 'Got it!';
 		document.querySelector('.next-step').addEventListener('click', () => {
-			browserWindow.close();
 			dataStore.saveSettings('tutorialShown', true);
+			browserWindow.close();
 		});
 	}
 });
