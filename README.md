@@ -25,7 +25,7 @@ Linear is proudly built with [Electron](https://github.com/atom/electron).
 Download the [latest build](https://github.com/mikaa123/linear/releases) or install via homebrew (thanks to [@goronfreeman](https://github.com/goronfreeman)):
 
 ```
-$ brew cask install linear
+$ brew install linear
 ```
 
 ## Caveats
